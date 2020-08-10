@@ -15,3 +15,10 @@ export type Question = {
 }
 
 export type QuestionState = Question & { answer: string[]}
+
+export type userAnswerDetails =  {
+  isCorrect:boolean;
+  correctAnswer: string;
+  question: string;
+  answer: string;
+}

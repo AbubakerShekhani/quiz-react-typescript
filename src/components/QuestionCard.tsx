@@ -14,12 +14,35 @@ const QuestionCard: React.FC<Props> =({ question, answers, userAnswer, callback,
     <div>
       Question Card
       <p dangerouslySetInnerHTML={{ __html: question}} />
-      <ul>
+      <div className="form-check" >
+
         { answers.map(answer => (
-          <p key={answer} dangerouslySetInnerHTML={{ __html: answer}} />
+            /*
+            <button key={answer} value={answer} onClick={callback}>
+              <span dangerouslySetInnerHTML={{ __html: answer}} ></span>
+            </button>
+            */
+
+           <label key={answer}>
+                <input
+                key={answer}
+                  type="radio"
+                  name="userSelectedAnswer"
+                  value={answer}
+                  className="form-check-input"
+                  onChange={callback}
+                  disabled={userAnswer?true:false}
+                />
+                <span dangerouslySetInnerHTML={{ __html: answer}} ></span>
+              </label>
+
+
+
+
+
         ))
         }
-      </ul>
+      </div>
 
     </div>
   )
