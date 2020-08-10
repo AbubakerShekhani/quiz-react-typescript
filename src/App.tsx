@@ -1,10 +1,12 @@
 import React, { FC, useState } from 'react';
 import './App.css';
-import {fetchQuiz } from './API';
+import { fetchQuiz } from './API';
 import QuestionCard from './components/QuestionCard';
 import { difficultyLevel, QuestionState, userAnswerDetails } from './types.d';
 import { Button, Layout, Row, Col, Card } from "antd";
 import "antd/dist/antd.css";
+import { requestFirebaseNotificationPermission } from './firebaseInit';
+
 
 const TOTALQUESTIONS = 10;
 
@@ -19,6 +21,9 @@ const App:FC = () =>  {
   const [questionNumber, setquestionNumber] = useState(0)
   const [score, setScore] = useState(0)
   const [userAnswers, setUserAnswers] = useState<userAnswerDetails[]>([])
+
+
+
 
   const startQuiz = async()  => {
 
@@ -69,6 +74,17 @@ const App:FC = () =>  {
     }
   }
 
+  requestFirebaseNotificationPermission()
+    .then((firebaseToken) => {
+
+      console.log(firebaseToken);
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+
+
+
   return (
     <Layout className="layout">
       <Header>
@@ -103,12 +119,17 @@ const App:FC = () =>  {
                   { quizEnd && !loading &&
 
 
-                    <Button type="primary" onClick={() => startQuiz()} style={{marginTop: 20}}>Start Quiz</Button>
+                    <Button type="primary" onClick={() => startQuiz()} style={{marginTop: 20}}>
+                      Start Quiz
+                    </Button>
                   }
 
-                  { loading ? <Button type="primary" loading style={{marginTop: 20}}>
+                  {
+                    loading &&
+                      <Button type="primary" loading style={{marginTop: 20}}>
                         Loading
-                      </Button> : null }
+                      </Button>
+                  }
 
                 </Col>
               </div>
