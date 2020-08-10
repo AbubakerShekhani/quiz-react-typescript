@@ -1,4 +1,5 @@
 import { Question, difficultyLevel } from './types.d';
+import { shuffleAnswers } from './utils';
 
 export const fetchQuiz =async(questionsAmount: number, difficult:difficultyLevel) => {
   const baseURL = `https://opentdb.com/api.php?amount=${questionsAmount}&category=18&type=multiple&difficulty=${difficultyLevel.EASY}`;
@@ -8,7 +9,7 @@ export const fetchQuiz =async(questionsAmount: number, difficult:difficultyLevel
   return data.results.map((question: Question) => (
     {
       ...question,
-      answers: [...question.incorrect_answers, question.correct_answer]
+      answers: shuffleAnswers([...question.incorrect_answers, question.correct_answer])
     }
   ))
 
