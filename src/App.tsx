@@ -3,8 +3,13 @@ import './App.css';
 import {fetchQuiz } from './API';
 import QuestionCard from './components/QuestionCard';
 import { difficultyLevel, QuestionState, userAnswerDetails } from './types.d';
+import { Button, Layout, Row, Col, Card } from "antd";
+import "antd/dist/antd.css";
 
 const TOTALQUESTIONS = 10;
+
+const style = { background: '#fff', padding: '8px 0' };
+const { Header, Content } = Layout;
 
 const App:FC = () =>  {
 
@@ -65,46 +70,106 @@ const App:FC = () =>  {
   }
 
   return (
-    <div className="App">
-      <div>
-      Quiz
+    <Layout className="layout">
+      <Header>
+        <h1 style={{color: '#fff'}}>Quiz App (Developed using React and TypeScript)</h1>
+      </Header>
+      <Content style={style}>
+          <Row>
+            <Col span={12} offset={6}>
+              <div className="site-card-border-less-wrapper">
+                { !loading && !quizEnd && questions.length > 0 &&
+                    <QuestionCard
+                      question = {questions[questionNumber].question}
+                      questionNumber = {questionNumber + 1}
+                      totalQuestions = {TOTALQUESTIONS}
+                      answers={questions[questionNumber].answers}
+                      userAnswer={userAnswers ? userAnswers[questionNumber]:undefined}
+                      callback={verifyAnswer}
+                    />
+                }
 
-      </div>
-        { loading ? <p>Loading..</p> : null }
+                {
+                  (quizEnd && questionNumber>0 ) ?
+                    <Card title="Quiz Finished" bordered={true} style={{ margin: '0 auto'  }}>
+                      <p><b>You Scored: { score }</b></p>
+                    </Card>
 
-        <div>User Score: { score }</div>
+                    :
+                    null
+                }
 
-        { !loading && !quizEnd && questions.length > 0 &&
-          <div>
-          <p>Question { questionNumber + 1 } / { TOTALQUESTIONS }</p>
-          <QuestionCard
-            question = {questions[questionNumber].question}
-            questionNumber = {questionNumber + 1}
-            totalQuestions = {TOTALQUESTIONS}
-            answers={questions[questionNumber].answers}
-            userAnswer={userAnswers ? userAnswers[questionNumber]:undefined}
-            callback={verifyAnswer}
-          />
-          </div>
-        }
+                <Col span={12} offset={8} >
+                  { quizEnd && !loading &&
 
-        { quizEnd &&
-              <div>
-                <button onClick={() => startQuiz()}>Start Quiz</button>
+
+                    <Button type="primary" onClick={() => startQuiz()} style={{marginTop: 20}}>Start Quiz</Button>
+                  }
+
+                  { loading ? <Button type="primary" loading style={{marginTop: 20}}>
+                        Loading
+                      </Button> : null }
+
+                </Col>
               </div>
-        }
-        {
-          (quizEnd && questionNumber>0 ) ?
-            <p>Quiz Finished. You Scored: { score }</p>
-            :
-            null
-        }
-        { !quizEnd &&
+
+
+                { !quizEnd &&
+                  <div style={{float: 'right', marginTop: 10 }}>
+                    <Button type="primary" onClick={() => nextQuestion()} >Next</Button>
+                  </div>
+                }
+
+
+
+              </Col>
+            </Row>
+
+        </Content>
+
+    </Layout>
+  /*
+    <div className="App">
+
+      <div>Quiz</div>
+
+      <DatePicker />
+      { loading ? <p>Loading..</p> : null }
+
+      <div>User Score: { score }</div>
+
+      { !loading && !quizEnd && questions.length > 0 &&
         <div>
-          <button onClick={() => nextQuestion()} >Next</button>
+        <p>Question { questionNumber + 1 } / { TOTALQUESTIONS }</p>
+        <QuestionCard
+          question = {questions[questionNumber].question}
+          questionNumber = {questionNumber + 1}
+          totalQuestions = {TOTALQUESTIONS}
+          answers={questions[questionNumber].answers}
+          userAnswer={userAnswers ? userAnswers[questionNumber]:undefined}
+          callback={verifyAnswer}
+        />
         </div>
-        }
+      }
+
+      { quizEnd &&
+            <div>
+              <button onClick={() => startQuiz()}>Start Quiz</button>
+            </div>
+      }
+      {
+        (quizEnd && questionNumber>0 ) ?
+          <p>Quiz Finished. You Scored: { score }</p>
+          :
+          null
+      }
+      { !quizEnd &&
+      <div>
+        <button onClick={() => nextQuestion()} >Next</button>
+      </div>
+      }
     </div>
+    */
   );
 }
 

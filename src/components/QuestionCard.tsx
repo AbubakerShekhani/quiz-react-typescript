@@ -1,4 +1,5 @@
 import React from 'react';
+import { Card } from 'antd';
 
 type Props = {
   question: string;
@@ -9,42 +10,33 @@ type Props = {
   totalQuestions: number;
 }
 
+
+
 const QuestionCard: React.FC<Props> =({ question, answers, userAnswer, callback, questionNumber, totalQuestions}) => {
   return (
-    <div>
-      Question Card
-      <p dangerouslySetInnerHTML={{ __html: question}} />
-      <div className="form-check" >
 
+      <Card title={`Question: ${questionNumber}/${totalQuestions}`} bordered={true} style={{ margin: '0 auto'  }}>
+        <p dangerouslySetInnerHTML={{ __html: question}} />
         { answers.map(answer => (
-            /*
-            <button key={answer} value={answer} onClick={callback}>
-              <span dangerouslySetInnerHTML={{ __html: answer}} ></span>
-            </button>
-            */
-
-           <label key={answer}>
-                <input
+          <p key={answer}>
+            <label >
+              <input
                 key={answer}
-                  type="radio"
-                  name="userSelectedAnswer"
-                  value={answer}
-                  className="form-check-input"
-                  onChange={callback}
-                  disabled={userAnswer?true:false}
-                />
-                <span dangerouslySetInnerHTML={{ __html: answer}} ></span>
-              </label>
-
-
-
-
-
-        ))
+                type="radio"
+                name="userSelectedAnswer"
+                value={answer}
+                className="form-check-input"
+                onChange={callback}
+                disabled={userAnswer?true:false}
+              />
+              <span dangerouslySetInnerHTML={{ __html: answer}} ></span>
+            </label>
+          </p>
+          ))
         }
-      </div>
+     </Card>
 
-    </div>
+
   )
 }
 
