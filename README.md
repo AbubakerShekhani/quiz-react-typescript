@@ -1,4 +1,12 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+<h2>Quiz App using React & Typescript</h2>
+
+<h2>Project LIVE URL</h2> 
+https://quiz-app-react-abubaker.netlify.app/
+
+<h3>Concepts</h3>
+- Typescript
+- Netlify
+- React in general
 
 ## Available Scripts
 
