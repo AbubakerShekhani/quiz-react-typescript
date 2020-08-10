@@ -9,7 +9,7 @@ import "antd/dist/antd.css";
 const TOTALQUESTIONS = 10;
 
 const style = { background: '#fff', padding: '8px 0' };
-const { Header, Content } = Layout;
+const { Header, Content, Footer } = Layout;
 
 const App:FC = () =>  {
 
@@ -126,50 +126,8 @@ const App:FC = () =>  {
             </Row>
 
         </Content>
-
+        <Footer style={{ textAlign: 'center', position: "absolute", bottom: 0, width: '100%' }}>Abubaker Shekhani &copy; 2020 Created by Abubaker Shekhani | Github: <a href="https://github.com/AbubakerShekhani">https://github.com/AbubakerShekhani</a></Footer>
     </Layout>
-  /*
-    <div className="App">
-
-      <div>Quiz</div>
-
-      <DatePicker />
-      { loading ? <p>Loading..</p> : null }
-
-      <div>User Score: { score }</div>
-
-      { !loading && !quizEnd && questions.length > 0 &&
-        <div>
-        <p>Question { questionNumber + 1 } / { TOTALQUESTIONS }</p>
-        <QuestionCard
-          question = {questions[questionNumber].question}
-          questionNumber = {questionNumber + 1}
-          totalQuestions = {TOTALQUESTIONS}
-          answers={questions[questionNumber].answers}
-          userAnswer={userAnswers ? userAnswers[questionNumber]:undefined}
-          callback={verifyAnswer}
-        />
-        </div>
-      }
-
-      { quizEnd &&
-            <div>
-              <button onClick={() => startQuiz()}>Start Quiz</button>
-            </div>
-      }
-      {
-        (quizEnd && questionNumber>0 ) ?
-          <p>Quiz Finished. You Scored: { score }</p>
-          :
-          null
-      }
-      { !quizEnd &&
-      <div>
-        <button onClick={() => nextQuestion()} >Next</button>
-      </div>
-      }
-    </div>
-    */
   );
 }
 
