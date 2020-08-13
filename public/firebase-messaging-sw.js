@@ -29,3 +29,16 @@ self.addEventListener('notificationclick', event => {
   console.log(event)
   return event;
 });
+
+const dynamicContentCache = 'Quizee-Dynamic-Cache';
+const cacheAssets = [
+    'https://opentdb.com/api.php?amount=10&category=18&type=multiple&difficulty=easy',
+];
+
+self.addEventListener('install', (event) => {
+    event.waitUntil(
+        caches.open(dynamicContentCache).then((cache)=>{
+            cache.addAll(cacheAssets);
+        })
+    )
+})
