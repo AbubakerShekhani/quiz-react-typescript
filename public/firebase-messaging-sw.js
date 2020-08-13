@@ -43,11 +43,13 @@ self.addEventListener('install', (event) => {
     )
 })
 
-self.addEventListener('fetch', function(event) {
-  console.log(event.request.url);
+self.addEventListener('fetch', event => {
   event.respondWith(
-      caches.match(event.request).then(function(response) {
-          return response || fetch(event.request);
-      })
-  );
-});
+    fetch(event.request).then(response => {
+      cache.put(event.request, response.clone());
+      return response;
+    }).catch(_ => {
+      return caches.match(event.request);
+    })
+  )
+ });
