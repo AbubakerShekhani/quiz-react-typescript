@@ -30,7 +30,7 @@ self.addEventListener('notificationclick', event => {
   return event;
 });
 
-const dynamicContentCache = 'Quizee-Dynamic-Cache';
+const dynamicContentCache = 'QuizApp-Dynamic-Content';
 const cacheAssets = [
     'https://opentdb.com/api.php?amount=10&category=18&type=multiple&difficulty=easy',
 ];
