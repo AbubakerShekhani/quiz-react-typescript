@@ -38,7 +38,9 @@ const cacheAssets = [
 self.addEventListener('install', (event) => {
     event.waitUntil(
         caches.open(dynamicContentCache).then((cache)=>{
-            cache.addAll(cacheAssets);
+          console.log("cache");
+          cache.addAll(cacheAssets);
+
         })
     )
 })
