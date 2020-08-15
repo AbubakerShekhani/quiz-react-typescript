@@ -11,7 +11,9 @@ ReactDOM.render(
   document.getElementById('root')
 );
 
-const swUrl = `${process.env.PUBLIC_URL}/sw.js`;
-navigator.serviceWorker.register(swUrl).then((result) => {
-  console.log('result', result)
+if (process.env.NODE_ENV === 'production' && 'serviceWorker' in navigator) {
+  const swUrl = `${process.env.PUBLIC_URL}/sw.js`;
+  navigator.serviceWorker.register(swUrl).then((result) => {
+    console.log('result', result)
 })
+}
