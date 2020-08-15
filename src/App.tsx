@@ -5,7 +5,6 @@ import QuestionCard from './components/QuestionCard';
 import { difficultyLevel, QuestionState, userAnswerDetails } from './types.d';
 import { Button, Layout, Row, Col, Card } from "antd";
 import "antd/dist/antd.css";
-import { requestFirebaseNotificationPermission } from './firebaseInit';
 
 
 const TOTALQUESTIONS = 10;
@@ -74,14 +73,6 @@ const App:FC = () =>  {
     }
   }
 
-  requestFirebaseNotificationPermission()
-    .then((firebaseToken) => {
-
-      console.log(firebaseToken);
-    })
-    .catch((err) => {
-      console.log(err);
-    });
 
 
 
